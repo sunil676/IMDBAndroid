@@ -120,21 +120,22 @@ public class ImdbListFragment extends Fragment implements ImdbListContract.View,
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
 
-        MenuItemCompat.setOnActionExpandListener(item,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                    // Do something when collapsed
-                        mImDbAdapter.setSearchResult(mListImDb);
-                        return true; // Return true to collapse action view
-                    }
+        item.setOnActionExpandListener( new MenuItem.OnActionExpandListener() {
 
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                    // Do something when expanded
-                        return true; // Return true to expand action view
-                    }
-                });
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Do something when collapsed
+                mImDbAdapter.setSearchResult(mListImDb);
+                return true; // Return true to collapse action view
+
+            }
+        });
     }
 
     @Override
